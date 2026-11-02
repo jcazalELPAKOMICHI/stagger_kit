@@ -32,3 +32,6 @@ migrate_working_dir/
 
 # Local tooling
 .claude/
+
+# FVM
+.fvm/
