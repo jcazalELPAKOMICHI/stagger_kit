@@ -42,7 +42,20 @@ jobs:
 
       - name: Validate package
         if: matrix.flutter == 'stable'
-        run: dart pub publish --dry-run
+        run: |
+          set +e
+          output=$(dart pub publish --dry-run 2>&1)
+          status=$?
+          echo "$output"
+          if [ $status -ne 0 ]; then
+            # Surface the validator's findings as an annotation, skipping the
+            # file tree, so they show on the run summary.
+            message=$(echo "$output" | grep -vE '^[│├└ ]+[│├└]' | tail -40)
+            message="${message//'%'/'%25'}"
+            message="${message//$'\n'/'%0A'}"
+            echo "::error title=dart pub publish --dry-run::$message"
+          fi
+          exit $status
 
   example:
     name: Example app
