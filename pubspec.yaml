@@ -1,0 +1,27 @@
+name: stagger_kit
+description: >-
+  Staggered entrance animations for Flutter. Composable fade, move, scale and
+  blur effects, a one-line API for any list of widgets, and lazy list/grid
+  support. Zero dependencies.
+version: 0.1.0
+repository: https://github.com/jcazalELPAKOMICHI/stagger_kit
+issue_tracker: https://github.com/jcazalELPAKOMICHI/stagger_kit/issues
+topics:
+  - animation
+  - stagger
+  - ui
+  - widget
+  - transition
+
+environment:
+  sdk: ^3.8.0
+  flutter: ">=3.32.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0

@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    name: Package (Flutter ${{ matrix.flutter }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Oldest supported version and the latest stable.
+        flutter: ["3.32.0", "stable"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ matrix.flutter == 'stable' && '' || matrix.flutter }}
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      - name: Check formatting
+        if: matrix.flutter == 'stable'
+        run: dart format --output=none --set-exit-if-changed lib test example/lib
+
+      - run: flutter analyze
+
+      - run: flutter test --coverage
+
+      - name: Validate package
+        if: matrix.flutter == 'stable'
+        run: dart pub publish --dry-run
+
+  example:
+    name: Example app
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: example
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter build web --release
