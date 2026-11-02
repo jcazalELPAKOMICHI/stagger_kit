@@ -12,6 +12,11 @@ topics:
   - ui
   - widget
   - transition
+screenshots:
+  - description: Login cascade, lazy list and diagonal grid on iOS.
+    path: doc/ios.gif
+  - description: Login cascade, lazy list and diagonal grid on Android.
+    path: doc/android.gif
 
 environment:
   sdk: ^3.8.0

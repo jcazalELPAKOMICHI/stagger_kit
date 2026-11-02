@@ -6,6 +6,13 @@
 Staggered entrance animations for Flutter, the effect where each element
 of a screen appears one after another: logins, onboarding, lists, grids.
 
+| iOS | Android |
+| :---: | :---: |
+| <img src="https://raw.githubusercontent.com/jcazalELPAKOMICHI/stagger_kit/main/doc/ios.gif" width="280" alt="stagger_kit demo on iOS: login cascade, lazy list and diagonal grid"> | <img src="https://raw.githubusercontent.com/jcazalELPAKOMICHI/stagger_kit/main/doc/android.gif" width="280" alt="stagger_kit demo on Android: login cascade, lazy list and diagonal grid"> |
+
+*Login cascade (`StaggerPresets.focusUp`), lazy list (`slideFromRight`) and
+diagonal grid (`pop`), all from the [example app](example/lib/main.dart).*
+
 - **One line** for any list of widgets: `[...].stagger()`
 - **Composable effects**: fade, move, slide, scale, blur, or your own
 - **Lazy lists and grids**: cascade on first frame, no replays while scrolling,
